@@ -6,6 +6,7 @@ import {
   IsPositive,
   IsInt,
 } from 'class-validator';
+import { CategoryData } from './category.entity';
 /**
  * @param  {string} name //Doit etre remplis, etre une chaine de caractere
  * @param  {string} description
@@ -27,4 +28,6 @@ export class CategoryDto {
   @IsPositive()
   @IsInt() //Empeche
   persons: number;
+
+  data?: CategoryData;
 }

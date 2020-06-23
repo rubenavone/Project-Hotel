@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from './category.entity';
-import { Repository } from 'typeorm';
+import { Repository, DeleteResult, UpdateResult } from 'typeorm';
 import { CategoryDto } from './category.dto';
 
 @Injectable()
@@ -46,19 +46,19 @@ export class CategoriesService {
   }
 
   async put(id: number, CategoryDto: CategoryDto): Promise<void> {
-    const resultUpdate = await this.categoriesRepository.update(
+    const resultUpdate: UpdateResult = await this.categoriesRepository.update(
       id,
       CategoryDto,
     );
     if (resultUpdate.affected === 0) {
-      throw new HttpException('Customer not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Customer not found', HttpStatus.I_AM_A_TEAPOT);
     }
   }
 
   async delete(id: number): Promise<void> {
-    const result = await this.categoriesRepository.delete(id);
+    const result: DeleteResult = await this.categoriesRepository.delete(id);
     if (result.affected === 0) {
-      throw new HttpException('Customer not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Customer not found', HttpStatus.I_AM_A_TEAPOT);
     }
   }
 }

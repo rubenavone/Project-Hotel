@@ -7,6 +7,10 @@ import {
   Param,
   Body,
   ParseIntPipe,
+  UsePipes,
+  ValidationPipe,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 import { Category } from './category.entity';
 import { CategoriesService } from './categories.service';
@@ -17,6 +21,7 @@ import { CategoryDto } from './category.dto';
  */
 
 @Controller('admin/categories')
+@UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
 export class CategoriesController {
   constructor(private categorieServices: CategoriesService) {}
 
@@ -39,11 +44,15 @@ export class CategoriesController {
   }
 
   @Put(':id')
-  put(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    return this.put(id);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() CategoryDto: CategoryDto,
+  ): Promise<void> {
+    return this.update(id, CategoryDto);
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.categorieServices.delete(id);
   }

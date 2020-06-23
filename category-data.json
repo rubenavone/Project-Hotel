@@ -1,0 +1,49 @@
+[{
+    "id": 1,
+    "name": "Dante",
+    "description": "Rejoignez dante et virgile avec cette chambre particuliere, chaque pièce represente un palier de l'enfer",
+    "persons": 4
+  },
+
+  {
+    "id": 3,
+    "name": "Barbe Rousse",
+    "description": "Une chambre Sous le soleil des caraïbes, des épée accroché et notre magnifique gris du gabon qui vous ravira de ses belles paroles",
+    "persons": 4
+  },
+  {
+    "name": "Chambre Simple",
+    "description": "Toutes nos chambre simple",
+    "persons": 1,
+    "data": [{
+      "id": 4,
+      "name": "Van gogh",
+      "description": "Une Simple Chambre Donnant sur la nature, le charme de la simplicité a prix correcte (Tournesol inclus)"
+    }]
+  },
+  {
+    "name": "Chambre Double",
+    "description": "Toutes nos chambre double",
+    "persons": 2,
+    "data": [
+      "rooms": []
+
+      "id": 2,
+      "name": "Christophe colomb",
+      "description": "Une chambre au couleur des etats-unis, des décoration magnifique en rapport avec cette incroyables pays"
+
+    ],
+    [
+      "id": 6,
+      "name": "Baudelaire",
+      "description": "Une chambre coquette, avec une belle bibliothèque contenant de nombreux ouvrages."
+    ],
+    [
+      "id": 5,
+      "name": "Leonard de Vinci",
+      "description": "Une chambre élaboré contenant des passage secret pour ce rendre d'une pièce a l'autre. Elle est agréablement décoré de nombreux plans."
+
+    ]]
+}
+
+]

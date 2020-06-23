@@ -7,6 +7,9 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
  * @param  {string} description
  * @param  {number} persons
  */
+export class CategoryData {
+  rooms: string[];
+}
 @Entity()
 export class Category {
   @PrimaryGeneratedColumn()
@@ -20,6 +23,9 @@ export class Category {
 
   @Column()
   persons: number;
+
+  @Column({ type: 'jsonb', nullable: true })
+  data: CategoryData;
 
   toString() {
     console.log(
