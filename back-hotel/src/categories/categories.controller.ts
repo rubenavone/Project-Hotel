@@ -20,8 +20,14 @@ import { CategoryDto } from './category.dto';
  * Appel des service dans ce fichiers controller
  */
 
-@Controller('admin/categories')
-@UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+@Controller('admin/categories') //Permet de simplifier les routes, au lieu de le faire dans chaque décorateur @GET(/admin/categories/)
+@UsePipes(
+  new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true,
+  }),
+)
 export class CategoriesController {
   constructor(private categorieServices: CategoriesService) {}
 
@@ -48,7 +54,7 @@ export class CategoriesController {
     @Param('id', ParseIntPipe) id: number,
     @Body() CategoryDto: CategoryDto,
   ): Promise<void> {
-    return this.update(id, CategoryDto);
+    return this.categorieServices.put(id, CategoryDto);
   }
 
   @Delete(':id')

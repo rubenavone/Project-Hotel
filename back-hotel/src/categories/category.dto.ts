@@ -29,5 +29,10 @@ export class CategoryDto {
   @IsInt() //Empeche
   persons: number;
 
+  @IsNotEmpty()
   data?: CategoryData;
+
+  get rooms(): string[] {
+    return this.data?.rooms || [];
+  }
 }

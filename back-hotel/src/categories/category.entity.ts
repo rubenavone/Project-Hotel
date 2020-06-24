@@ -7,9 +7,11 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
  * @param  {string} description
  * @param  {number} persons
  */
+
 export class CategoryData {
   rooms: string[];
 }
+
 @Entity()
 export class Category {
   @PrimaryGeneratedColumn()
@@ -31,5 +33,19 @@ export class Category {
     console.log(
       `[ id : ${this.id} name: ${this.name} description : ${this.description} persons: ${this.persons} ]`,
     );
+  }
+
+  /**
+   * Permet de lire rooms
+   */
+  get rooms(): string[] {
+    return this.data?.rooms || [];
+  }
+  /**
+   * Permet de modifier rooms
+   */
+  set rooms(a: string[]) {
+    this.data = this.data || { rooms: [] };
+    this.data?.rooms;
   }
 }
