@@ -32,19 +32,19 @@ export class CategoriesService {
     return categoryResult;
   }
 
-  postCategory(CategoryDto: CategoryDto): Promise<Category> {
+  postCategory(categoryDto: CategoryDto): Promise<Category> {
     //Création d'une verification pour qu'il n'y ai pas de doublons de chambre
-    this.checkIfExist(CategoryDto.rooms);
-    return this.categoriesRepository.save(CategoryDto);
+    this.checkIfExist(categoryDto.rooms);
+    return this.categoriesRepository.save(categoryDto);
   }
 
   /**
    * La même méthode mais en version insert/asynchrone
    */
-  async postCategoryAsync(CategoryDto: CategoryDto): Promise<Category> {
-    console.log(CategoryDto);
-    await this.checkIfExist(CategoryDto.rooms);
-    const insertResult = await this.categoriesRepository.insert(CategoryDto);
+  async postCategoryAsync(categoryDto: CategoryDto): Promise<Category> {
+    console.log(categoryDto);
+    await this.checkIfExist(categoryDto.rooms);
+    const insertResult = await this.categoriesRepository.insert(categoryDto);
     const insertedId = insertResult.identifiers[0].id;
     return this.categoriesRepository.findOne(insertedId);
   }
@@ -52,13 +52,13 @@ export class CategoriesService {
   /**
    *
    * @param id
-   * @param CategoryDto
+   * @param categoryDto
    */
-  async put(id: number, CategoryDto: CategoryDto): Promise<void> {
-    await this.checkIfExist(CategoryDto.rooms, id);
+  async put(id: number, categoryDto: CategoryDto): Promise<void> {
+    await this.checkIfExist(categoryDto.rooms, id);
     const resultUpdate: UpdateResult = await this.categoriesRepository.update(
       id,
-      CategoryDto,
+      categoryDto,
     );
     if (resultUpdate.affected === 0) {
       throw new HttpException('Customer not found', HttpStatus.I_AM_A_TEAPOT);

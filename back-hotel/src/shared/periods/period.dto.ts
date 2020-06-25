@@ -1,14 +1,4 @@
-import {
-  IsNotEmpty,
-  IsString,
-  MaxLength,
-  IsNumber,
-  IsPositive,
-  IsInt,
-  IsISO8601,
-  Allow,
-  isISO31661Alpha2,
-} from 'class-validator';
+import { IsNumber, IsISO8601, Allow } from 'class-validator';
 import { PeriodData } from './period.entity';
 /**
  * @param  {string} name //Doit etre remplis, etre une chaine de caractere

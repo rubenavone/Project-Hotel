@@ -1,18 +1,31 @@
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Column,
   ManyToOne,
   JoinColumn,
+  Column,
 } from 'typeorm';
-import { Category } from 'src/categories/category.entity';
+import { Category } from '../categories/category.entity';
 
-export class PeriodData {
-  prices: number[]; //Du dimanche au samedi
+export class ReservationCustomerData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  adress: {
+    street: string;
+    zipcode: string;
+    city: string;
+    country: string;
+  };
+}
+
+export class ReservationData {
+  customer: ReservationCustomerData;
 }
 
 @Entity()
-export class Period {
+export class Reservation {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -30,5 +43,5 @@ export class Period {
   endDate: string; //'2020-06-24'
 
   @Column({ type: 'jsonb' })
-  data: PeriodData;
+  data: ReservationData;
 }

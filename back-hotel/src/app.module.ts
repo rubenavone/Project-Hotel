@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
-import { CategoriesModule } from './categories/categories.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Category } from './categories/category.entity';
-import { Period } from './periods/period.entity';
-import { PeriodsModule } from './periods/periods.module';
+import { Category } from './shared/categories/category.entity';
+import { Period } from './shared/periods/period.entity';
+import { AdminModule } from './admin/admin.module';
+import { Reservation } from './shared/reservations/reservation.entity';
+import { BookingModule } from './booking/booking.module';
 
 @Module({
   imports: [
-    CategoriesModule,
-    PeriodsModule,
+    AdminModule,
+    BookingModule,
     TypeOrmModule.forRoot({
       type: 'postgres', //type de bases de données
       host: 'localhost',
@@ -17,7 +18,7 @@ import { PeriodsModule } from './periods/periods.module';
       password: 'azerty',
       database: 'hoteldb',
       schema: 'hotel', //Choose a scheme default: public
-      entities: [Category, Period],
+      entities: [Category, Period, Reservation],
       synchronize: true, //Permet de synchroniser les entité
     }),
   ],

@@ -61,18 +61,18 @@ export class PeriodsService {
   /**
    * La même méthode mais en version insert/asynchrone
    */
-  async postPeriodAsync(PeriodDto: PeriodDto): Promise<Period> {
+  async postPeriodAsync(periodDto: PeriodDto): Promise<Period> {
     const existingPeriods: Period[] = await this.searchAll({
-      startDate: PeriodDto.startDate,
-      endDate: PeriodDto.endDate,
-      categoryID: PeriodDto.categoryId,
+      startDate: periodDto.startDate,
+      endDate: periodDto.endDate,
+      categoryID: periodDto.categoryId,
     });
 
     if (existingPeriods.length > 0) {
       throw new HttpException('periods must not overlap.', HttpStatus.CONFLICT);
     }
 
-    const insertResult = await this.periodRepository.insert(PeriodDto);
+    const insertResult = await this.periodRepository.insert(periodDto);
     const insertedId = insertResult.identifiers[0].id;
     return this.periodRepository.findOne(insertedId);
   }
@@ -80,13 +80,13 @@ export class PeriodsService {
   /**
    *
    * @param id
-   * @param PeriodDto
+   * @param periodDto
    */
-  async put(id: number, PeriodDto: PeriodDto): Promise<void> {
+  async put(id: number, periodDto: PeriodDto): Promise<void> {
     const existingPeriods: Period[] = await this.searchAll({
-      startDate: PeriodDto.startDate,
-      endDate: PeriodDto.endDate,
-      categoryID: PeriodDto.categoryId,
+      startDate: periodDto.startDate,
+      endDate: periodDto.endDate,
+      categoryID: periodDto.categoryId,
       ignorePeriodId: id,
     });
 
@@ -96,7 +96,7 @@ export class PeriodsService {
 
     const resultUpdate: UpdateResult = await this.periodRepository.update(
       id,
-      PeriodDto,
+      periodDto,
     );
     if (resultUpdate.affected === 0) {
       throw new HttpException('Customer not found', HttpStatus.I_AM_A_TEAPOT);

@@ -14,9 +14,9 @@ import {
   UsePipes,
   HttpException,
 } from '@nestjs/common';
-import { PeriodsService } from './periods.service';
-import { Period } from './period.entity';
-import { PeriodDto } from './period.dto';
+import { PeriodsService } from '../shared/periods/periods.service';
+import { Period } from '../shared/periods/period.entity';
+import { PeriodDto } from '../shared/periods/period.dto';
 import { ApiQuery } from '@nestjs/swagger';
 
 @Controller('admin/periods')
@@ -31,11 +31,11 @@ export class PeriodsController {
   constructor(private PeriodsServices: PeriodsService) {}
 
   @Get() //admin/periods?categorie=3&start=2020/06/24&end=2020/07/02
-  @ApiQuery({ name: 'categorieID', required: false })
+  @ApiQuery({ name: 'categoryId', required: false })
   @ApiQuery({ name: 'startDate', required: false })
   @ApiQuery({ name: 'endDate', required: false })
   searchAll(
-    @Query('categorieID') categorieId?: number,
+    @Query('categoryId') categoryId?: number,
     @Query('startDate') startDate?: string,
     @Query('endDate') endDate?: string,
   ): Promise<Period[]> {
