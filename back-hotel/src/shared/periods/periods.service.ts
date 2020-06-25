@@ -17,7 +17,7 @@ export class PeriodsService {
   async searchAll(options?: {
     startDate?: string;
     endDate?: string;
-    categoryID?: number;
+    categoryId?: number;
     ignorePeriodId?: number;
   }): Promise<Period[]> {
     let query = this.periodRepository.createQueryBuilder('period');
@@ -27,16 +27,16 @@ export class PeriodsService {
       });
     }
     if (options?.endDate) {
-      query = query.andWhere('period.endDate <= :endDate', {
-        endDate: options.startDate,
+      query = query.andWhere('period.startDate <= :endDate', {
+        endDate: options.endDate,
       });
     }
-    if (options?.categoryID) {
-      query = query.andWhere('period.endDate = :categoryID', {
-        categoryID: options.startDate,
+    if (options?.categoryId) {
+      query = query.andWhere('period.categoryId = :catId', {
+        catId: options.categoryId,
       });
     }
-    const allPeriods = await query.getMany();
+    const allPeriods: Period[] = await query.getMany();
     // return allPeriods.filter(
     //   period =>
     //     !options?.ignorePeriodId || period.id !== options.ignorePeriodId);
@@ -65,7 +65,7 @@ export class PeriodsService {
     const existingPeriods: Period[] = await this.searchAll({
       startDate: periodDto.startDate,
       endDate: periodDto.endDate,
-      categoryID: periodDto.categoryId,
+      categoryId: periodDto.categoryId,
     });
 
     if (existingPeriods.length > 0) {
@@ -86,7 +86,7 @@ export class PeriodsService {
     const existingPeriods: Period[] = await this.searchAll({
       startDate: periodDto.startDate,
       endDate: periodDto.endDate,
-      categoryID: periodDto.categoryId,
+      categoryId: periodDto.categoryId,
       ignorePeriodId: id,
     });
 

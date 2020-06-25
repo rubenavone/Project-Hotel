@@ -20,7 +20,7 @@ export class ReservationsService {
     @InjectRepository(Reservation)
     private reservationRepository: Repository<Reservation>,
     private categoryService: CategoriesService,
-    private periodeService: PeriodsService,
+    private periodService: PeriodsService,
   ) {}
 
   async searchAll(options?: {
@@ -49,76 +49,7 @@ export class ReservationsService {
     return allReservations;
   }
 
-  // async searchAvailable(
-  //   stay: Stay,
-  //   persons: number,
-  // ): Promise<AvailabilityResultDto> {
-  //   //Categorie de chambre
-  //   const categories: Category[] = (await this.categoryService.getAll()).filter(
-  //     category => category.persons >= persons,
-  //   );
-
-  //   //Les periode de prix qui chevauchent les dates dans le séjours
-  //   const periods: Period[] = await this.periodeService.searchAll(stay);
-
-  //   //Réservation existante qui chevauchent les dates du séjours
-  //   const reservations: Reservation[] = await this.searchAll(stay);
-
-  //   const list = categories.map(category => {
-  //     const max: number = (category.data?.rooms || []).length;
-
-  //     const actualCategoryReservation: Reservation[] = reservations.filter(
-  //       periods => periods.categoryId === category.id,
-  //     );
-
-  //     const available: boolean = this.checkAvailabilityEachDay(
-  //       stay,
-  //       actualCategoryReservation,
-  //       max,
-  //     );
-
-  //     const price = available ? this.computePrice(stay, periods) : 0;
-
-  //     return { category, available, price };
-  //   });
-  //   return { nights: DateUtil.computeNights(stay), list };
-  // }
-  // private computePrice(stay: Stay, periods: Period[]) {
-  //   let price = 0;
-  //   for (
-  //     let day = stay.startDate;
-  //     day <= stay.endDate;
-  //     day = DateUtil.nextDay(day)
-  //   ) {
-  //     const period = DateUtil.findForDay(day, periods);
-  //     if (!period) {
-  //       return null;
-  //     }
-  //     price += period.data.prices[DateUtil.weekDay(day)];
-  //   }
-  //   return price;
-  // }
-
-  // private checkAvailabilityEachDay(
-  //   stay: Stay,
-  //   reservations: Reservation[],
-  //   max: number,
-  // ) {
-  //   let maxResa: number = 0;
-
-  //   for (
-  //     let day = stay.startDate;
-  //     day <= stay.endDate;
-  //     day = DateUtil.nextDay(day)
-  //   ) {
-  //     const count: number = DateUtil.filterForDay(day, reservations).length;
-  //     maxResa = Math.max(max, count);
-  //   }
-  //   const available: boolean = maxResa < max;
-  //   return available;
-  // }
-
-  async searchAvailable2(
+  async searchAvailable(
     stay: Stay,
     persons: number,
   ): Promise<AvailabilityResultDto> {
@@ -126,8 +57,10 @@ export class ReservationsService {
     const categories: Category[] = (await this.categoryService.getAll()).filter(
       category => category.persons >= persons,
     );
+    console.log(categories);
     // Périodes de prix qui chevauchent les dates du séjour
-    const periods: Period[] = await this.periodeService.searchAll(stay);
+    const periods: Period[] = await this.periodService.searchAll(stay);
+
     // Réservations qui chevauchent les dates du séjour
     const reservations: Reservation[] = await this.searchAll(stay);
 
@@ -139,12 +72,14 @@ export class ReservationsService {
       const categoryPeriods: Period[] = periods.filter(
         period => period.categoryId === category.id,
       );
-      const available = this.checkAvailabilityEachDay2(
+
+      const available = this.checkAvailabilityEachDay(
         stay,
         categoryReservations,
         max,
       );
-      const price = this.computePrice2(stay, categoryPeriods);
+      const price = this.computePrice(stay, categoryPeriods);
+      console.log(periods);
       return { category, available, price };
     });
     return { nights: DateUtil.computeNights(stay), list };
@@ -161,17 +96,17 @@ export class ReservationsService {
       throw new HttpException('Room to small.', HttpStatus.PRECONDITION_FAILED);
     }
     // Périodes de prix qui chevauchent les dates du séjour
-    const categoryPeriods: Period[] = await this.periodeService.searchAll(stay);
+    const categoryPeriods: Period[] = await this.periodService.searchAll(stay);
     // Réservations qui chevauchent les dates du séjour
     const categoryReservations: Reservation[] = await this.searchAll(stay);
     const max = (category.data?.rooms || []).length;
 
-    const available = this.checkAvailabilityEachDay2(
+    const available = this.checkAvailabilityEachDay(
       stay,
       categoryReservations,
       max,
     );
-    const price = this.computePrice2(stay, categoryPeriods);
+    const price = this.computePrice(stay, categoryPeriods);
     if (available) {
       const uuid = uuidv1();
       const reservationData = {
@@ -207,7 +142,7 @@ export class ReservationsService {
       );
     }
   }
-  private computePrice2(stay: Stay, periods: Period[]) {
+  private computePrice(stay: Stay, periods: Period[]) {
     let price = 0;
     for (
       let day = stay.startDate;
@@ -223,7 +158,7 @@ export class ReservationsService {
     return price;
   }
 
-  private checkAvailabilityEachDay2(
+  private checkAvailabilityEachDay(
     stay: Stay,
     reservations: Reservation[],
     max: number,
@@ -247,4 +182,71 @@ export interface Stay {
   endDate: string;
 }
 
-const stay: Stay = { startDate: '2020-06-01', endDate: '2020-07-05' };
+// async searchAvailable(
+//   stay: Stay,
+//   persons: number,
+// ): Promise<AvailabilityResultDto> {
+//   //Categorie de chambre
+//   const categories: Category[] = (await this.categoryService.getAll()).filter(
+//     category => category.persons >= persons,
+//   );
+
+//   //Les periode de prix qui chevauchent les dates dans le séjours
+//   const periods: Period[] = await this.periodeService.searchAll(stay);
+
+//   //Réservation existante qui chevauchent les dates du séjours
+//   const reservations: Reservation[] = await this.searchAll(stay);
+
+//   const list = categories.map(category => {
+//     const max: number = (category.data?.rooms || []).length;
+
+//     const actualCategoryReservation: Reservation[] = reservations.filter(
+//       periods => periods.categoryId === category.id,
+//     );
+
+//     const available: boolean = this.checkAvailabilityEachDay(
+//       stay,
+//       actualCategoryReservation,
+//       max,
+//     );
+
+//     const price = available ? this.computePrice(stay, periods) : 0;
+
+//     return { category, available, price };
+//   });
+//   return { nights: DateUtil.computeNights(stay), list };
+// }
+// private computePrice(stay: Stay, periods: Period[]) {
+//   let price = 0;
+//   for (
+//     let day = stay.startDate;
+//     day <= stay.endDate;
+//     day = DateUtil.nextDay(day)
+//   ) {
+//     const period = DateUtil.findForDay(day, periods);
+//     if (!period) {
+//       return null;
+//     }
+//     price += period.data.prices[DateUtil.weekDay(day)];
+//   }
+//   return price;
+// }
+
+// private checkAvailabilityEachDay(
+//   stay: Stay,
+//   reservations: Reservation[],
+//   max: number,
+// ) {
+//   let maxResa: number = 0;
+
+//   for (
+//     let day = stay.startDate;
+//     day <= stay.endDate;
+//     day = DateUtil.nextDay(day)
+//   ) {
+//     const count: number = DateUtil.filterForDay(day, reservations).length;
+//     maxResa = Math.max(max, count);
+//   }
+//   const available: boolean = maxResa < max;
+//   return available;
+// }

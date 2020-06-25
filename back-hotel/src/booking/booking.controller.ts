@@ -26,7 +26,7 @@ export class BookingController {
     @Query('persons', ParseIntPipe) persons: number,
   ): Promise<AvailabilityResultDto> {
     const stay: Stay = { startDate, endDate };
-    return this.reservationsServices.searchAvailable2(stay, persons);
+    return this.reservationsServices.searchAvailable(stay, persons);
   }
 
   @Post('try-booking') // /booking/available?start=2020/07/12&end=2020/07/12&persons=2

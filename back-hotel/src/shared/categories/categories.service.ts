@@ -11,11 +11,11 @@ export class CategoriesService {
      * Cette partie permet d'ajouter l'entité categorie a la classe
      */
     @InjectRepository(Category)
-    private categoriesRepository: Repository<Category>,
+    private categoryRepository: Repository<Category>,
   ) {}
 
   getAll(): Promise<Category[]> {
-    return this.categoriesRepository.find();
+    return this.categoryRepository.find();
   }
 
   /**
@@ -23,9 +23,7 @@ export class CategoriesService {
    * @param {number} id
    */
   async getOne(id: number): Promise<Category> {
-    const categoryResult: Category = await this.categoriesRepository.findOne(
-      id,
-    );
+    const categoryResult: Category = await this.categoryRepository.findOne(id);
     if (!categoryResult) {
       throw new HttpException('Customer not found', HttpStatus.I_AM_A_TEAPOT);
     }
@@ -35,7 +33,7 @@ export class CategoriesService {
   postCategory(categoryDto: CategoryDto): Promise<Category> {
     //Création d'une verification pour qu'il n'y ai pas de doublons de chambre
     this.checkIfExist(categoryDto.rooms);
-    return this.categoriesRepository.save(categoryDto);
+    return this.categoryRepository.save(categoryDto);
   }
 
   /**
@@ -44,9 +42,9 @@ export class CategoriesService {
   async postCategoryAsync(categoryDto: CategoryDto): Promise<Category> {
     console.log(categoryDto);
     await this.checkIfExist(categoryDto.rooms);
-    const insertResult = await this.categoriesRepository.insert(categoryDto);
+    const insertResult = await this.categoryRepository.insert(categoryDto);
     const insertedId = insertResult.identifiers[0].id;
-    return this.categoriesRepository.findOne(insertedId);
+    return this.categoryRepository.findOne(insertedId);
   }
 
   /**
@@ -56,7 +54,7 @@ export class CategoriesService {
    */
   async put(id: number, categoryDto: CategoryDto): Promise<void> {
     await this.checkIfExist(categoryDto.rooms, id);
-    const resultUpdate: UpdateResult = await this.categoriesRepository.update(
+    const resultUpdate: UpdateResult = await this.categoryRepository.update(
       id,
       categoryDto,
     );
@@ -69,7 +67,7 @@ export class CategoriesService {
    * @param id
    */
   async delete(id: number): Promise<void> {
-    const result: DeleteResult = await this.categoriesRepository.delete(id);
+    const result: DeleteResult = await this.categoryRepository.delete(id);
     if (result.affected === 0) {
       throw new HttpException('Customer not found', HttpStatus.I_AM_A_TEAPOT);
     }
@@ -79,7 +77,7 @@ export class CategoriesService {
     newRooms: string[],
     ignodeCurrentId?: number,
   ): Promise<void> {
-    const existingCategories: Category[] = await this.categoriesRepository.find();
+    const existingCategories: Category[] = await this.categoryRepository.find();
 
     const otherCategories: Category[] = existingCategories.filter(
       cat => cat.id !== ignodeCurrentId,

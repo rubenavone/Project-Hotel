@@ -21,6 +21,9 @@ export class ReservationCustomerData {
 }
 
 export class ReservationData {
+  nights: number;
+  price: number;
+  persons: number;
   customer: ReservationCustomerData;
 }
 
