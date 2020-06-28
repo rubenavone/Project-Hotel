@@ -37,3 +37,8 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# ignore sass compiled files and cache
+
+front-hotel/src/css/variable.css
+front-hotel/src/.sass-cache
