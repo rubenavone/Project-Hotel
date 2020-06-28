@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Admin from "./component/admin/Admin";
 import Home from "./component/public/Home";
+import "./css/variable.css";
 
 function App() {
   return (

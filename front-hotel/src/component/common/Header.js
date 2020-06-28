@@ -23,22 +23,22 @@ const Header = (props) => {
       <div className="row align-items-center">
         <div className="col-md-4">
           <img
-            className="img-fluid"
-            src="/logo.png"
+            className="img-fluid "
+            src="/image2vector.svg"
             alt="retour accueil - Hotel Paradise"
           />
         </div>
         <div className="col-md-8">
           <h1>Le paradis sur terre</h1>
           <nav>
-            <ul className="list-unstyled text-dark btn-link d-flex justify-content-end ">
+            <ul className="list-unstyled text-dark d-flex justify-content-end ">
               {/* <li>
               <Link className={isSelected("/")} to="/">
                 Acceuil
               </Link>
             </li> */}
               <li>
-                <Link className={isSelected("/admin")} to="/admin">
+                <Link className={isSelected("/admin")} to="/admin/reservations">
                   Administration
                 </Link>
               </li>

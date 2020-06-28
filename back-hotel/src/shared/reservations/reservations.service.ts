@@ -35,7 +35,7 @@ export class ReservationsService {
       });
     }
     if (options?.endDate) {
-      query = query.andWhere('reservation.endDate <= :endDate', {
+      query = query.andWhere('reservation.startDate <= :endDate', {
         endDate: options.startDate,
       });
     }

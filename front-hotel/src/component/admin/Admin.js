@@ -16,8 +16,8 @@ export default class Admin extends Component {
     //   ? "rounded mt-3 p-2 h5 btn-danger"
     //   : " rounded mt-3 p-2 h5 btn-primary";
     return path === urlPath
-      ? "rounded mt-3 p-2 h5 btn-danger"
-      : " rounded mt-3 p-2 h5 btn-primary";
+      ? "rounded m-4 p-2 h5 btn-danger"
+      : " rounded m-4 p-2 h5 btn-primary";
   };
 
   render() {
@@ -26,8 +26,8 @@ export default class Admin extends Component {
         <Header path="/admin" />
         <main className="container">
           <div className="row">
-            <nav className="d-flex">
-              <ul className="list-unstyled text-dark btn-link d-flex justify-content-end">
+            <nav className="d-flex mt-4">
+              <ul className="list-unstyled text-dark  d-flex justify-content-end">
                 <li>
                   <Link
                     className={this.isSelected("/admin/reservations")}
