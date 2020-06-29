@@ -44,7 +44,8 @@ export default class Home extends Component {
         <Header path="/" />
         <div className="row">
           <h1 className="text-center m-3">Formulaire de réservation</h1>
-
+        </div>
+        <div className="row mx-auto">
           <form onSubmit={this.handleSubmit} className="p-3 mt-5">
             <div className="form-row">
               <div className="form-group col-md-6">
@@ -72,19 +73,22 @@ export default class Home extends Component {
               </label>
             </div>
             <div className="form-row">
-              <div className="form-group col-md-6">
+              <div className="col-md-6">
                 <label htmlFor="persons-js">
-                  Nombre de personnes :
-                  <input
+                  Catégory de chambre :
+                  <select
                     required={true}
                     id="persons-js"
-                    type="number"
-                    max="4"
                     className="form-control"
-                  />
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
                 </label>
               </div>
-              <div className="form-group col-md-6">
+              <div className="col-md-6">
                 <label htmlFor="room-for-js">
                   Catégory de chambre :
                   <select required={true} id="room-js" className="form-control">

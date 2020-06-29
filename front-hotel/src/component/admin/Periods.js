@@ -48,47 +48,45 @@ class Periods extends Component {
   render() {
     const periods = this.state.periods;
     return (
-      <div className="col">
-        <div className="row">
-          <div className="col">
-            <h1 className="m-3 text-center">Periods</h1>
-          </div>
+      <div className="row">
+        <div className="col">
+          <h1 className="m-3 text-center">Periods</h1>
+
+          {this.state.error && (
+            <h2>
+              le code de l'erreur est {this.state.error.message}
+              Merci de contactez l'administrateur
+            </h2>
+          )}
         </div>
-        {this.state.error && (
-          <h2>
-            le code de l'erreur est {this.state.error.message}
-            Merci de contactez l'administrateur
-          </h2>
-        )}
-        <div className="table-responsive">
-          <table className="table table-striped ">
-            <thead className="thead-dark">
-              <tr>
-                <th>ID</th>
-                <th>Catégorie</th>
-                <th>Date de début</th>
-                <th>Date de fin</th>
-                <th>di/lu/ma/me/je/ve/sa</th>
-              </tr>
-            </thead>
-            <tbody>
-              {periods.map((period) => {
-                return (
-                  <tr key={period.id}>
-                    <td>{period.id}</td>
-                    <td>{period.categoryId}</td>
-                    <td>{period.startDate}</td>
-                    <td>{period.endDate}</td>
-                    <td>{`${period.data.prices}`}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          <button className="btn btn-dark btn-lg btn-block">
-            Ajouter une période de prix
-          </button>
-        </div>
+
+        <table className="table table-striped ">
+          <thead className="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>Catégorie</th>
+              <th>Date de début</th>
+              <th>Date de fin</th>
+              <th>di/lu/ma/me/je/ve/sa</th>
+            </tr>
+          </thead>
+          <tbody>
+            {periods.map((period) => {
+              return (
+                <tr key={period.id}>
+                  <td>{period.id}</td>
+                  <td>{period.categoryId}</td>
+                  <td>{period.startDate}</td>
+                  <td>{period.endDate}</td>
+                  <td>{`${period.data.prices}`}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <button className="btn btn-dark btn-lg btn-block">
+          Ajouter une période de prix
+        </button>
       </div>
     );
   }

@@ -48,47 +48,45 @@ class Rooms extends Component {
   render() {
     const categories = this.state.category;
     return (
-      <div className="col">
-        <div className="row">
-          <div className="col  mb-2 rounded ">
-            <h1 className="m-2 text-center">Categorie</h1>
-          </div>
+      <div>
+        <div className="col  mb-2 rounded ">
+          <h1 className="m-3 text-center">Categorie</h1>
+
+          {this.state.error && (
+            <h2>
+              le code de l'erreur est {this.state.error.message}
+              Merci de contactez l'administrateur
+            </h2>
+          )}
         </div>
-        {this.state.error && (
-          <h2>
-            le code de l'erreur est {this.state.error.message}
-            Merci de contactez l'administrateur
-          </h2>
-        )}
-        <div className="table-responsive">
-          <table className="table table-striped ">
-            <thead className="thead-dark">
-              <tr>
-                <th>ID</th>
-                <th>Catégorie</th>
-                <th>Description</th>
-                <th>Nombre de lits</th>
-                <th>Nombre de chambre</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories.map((category) => {
-                return (
-                  <tr key={category.id}>
-                    <td>{category.id}</td>
-                    <td>{category.name}</td>
-                    <td>{category.description}</td>
-                    <td>{category.persons}</td>
-                    <td>{`${category.data.rooms.length}`}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          <button className="btn btn-dark btn-lg btn-block">
-            Ajouter une catégorie de chambre
-          </button>
-        </div>
+
+        <table className="table table-striped ">
+          <thead className="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>Catégorie</th>
+              <th>Description</th>
+              <th>Nombre de lits</th>
+              <th>Nombre de chambre</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.map((category) => {
+              return (
+                <tr key={category.id}>
+                  <td>{category.id}</td>
+                  <td>{category.name}</td>
+                  <td>{category.description}</td>
+                  <td>{category.persons}</td>
+                  <td>{`${category.data.rooms.length}`}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <button className="btn btn-dark btn-lg btn-block">
+          Ajouter une catégorie de chambre
+        </button>
       </div>
     );
   }

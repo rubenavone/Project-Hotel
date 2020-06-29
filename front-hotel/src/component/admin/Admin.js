@@ -55,7 +55,7 @@ export default class Admin extends Component {
               </ul>
             </nav>
           </div>
-          <div className="row">
+          <div className="container-fluid">
             <Switch>
               <Route path="/admin/reservations" component={Reservations} />
               <Route path="/admin/rooms" component={Rooms} />

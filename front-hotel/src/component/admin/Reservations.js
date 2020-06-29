@@ -49,49 +49,47 @@ class Reservations extends Component {
   render = () => {
     const reservation = this.state.reservations;
     return (
-      <div className="col">
-        <div className="row">
-          <div className="col">
-            <h1 className="m-3 text-center">Réservation</h1>
-          </div>
+      <div className="row">
+        <div className="col">
+          <h1 className="m-3 text-center">Réservation</h1>
+
+          {this.state.error && (
+            <h2>
+              le code de l'erreur est {this.state.error.message}
+              Merci de contactez l'administrateur
+            </h2>
+          )}
         </div>
-        {this.state.error && (
-          <h2>
-            le code de l'erreur est {this.state.error.message}
-            Merci de contactez l'administrateur
-          </h2>
-        )}
-        <div className="table-responsive">
-          <table className="table table-striped ">
-            <thead className="thead-dark">
-              <tr>
-                <th>ID</th>
-                <th>Catégorie</th>
-                <th>Date de début</th>
-                <th>Date de fin</th>
-                <th>Nombre de personne</th>
-                <th>Nombre de nuit</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reservation.map((reservation) => {
-                return (
-                  <tr key={reservation.id}>
-                    <td>{reservation.id}</td>
-                    <td>{reservation.categoryId}</td>
-                    <td>{reservation.startDate}</td>
-                    <td>{reservation.endDate}</td>
-                    <td>{reservation.data.persons}</td>
-                    <td>{reservation.id}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          <button className="btn btn-dark btn-lg btn-block">
-            Ajouter une réservation
-          </button>
-        </div>
+
+        <table className="table table-striped ">
+          <thead className="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>Catégorie</th>
+              <th>Date de début</th>
+              <th>Date de fin</th>
+              <th>Nombre de personne</th>
+              <th>Nombre de nuit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reservation.map((reservation) => {
+              return (
+                <tr key={reservation.id}>
+                  <td>{reservation.id}</td>
+                  <td>{reservation.categoryId}</td>
+                  <td>{reservation.startDate}</td>
+                  <td>{reservation.endDate}</td>
+                  <td>{reservation.data.persons}</td>
+                  <td>{reservation.id}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <button className="btn btn-dark btn-lg btn-block">
+          Ajouter une réservation
+        </button>
       </div>
     );
   };
