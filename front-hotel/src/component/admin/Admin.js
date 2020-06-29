@@ -61,7 +61,6 @@ export default class Admin extends Component {
               <Route path="/admin/rooms" component={Rooms} />
               <Route path="/admin/periods" component={Periods} />
             </Switch>
-            <div className="col"></div>
           </div>
         </main>
       </div>
