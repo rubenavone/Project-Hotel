@@ -7,7 +7,7 @@ class Reservations extends Component {
       reservations: [],
       error: false,
     };
-    this.fd = new FetchData();
+    this.fd = new FetchData(); //singleton une seule instance
   }
   //aficher les donnée et gerer le cas des erreur sur l'ecran
   successResevation = (data) => {
@@ -19,6 +19,10 @@ class Reservations extends Component {
     this.setState(copyState);
   };
 
+  /**
+   * Si une erreur est presente on change la propriété de l'objet state
+   * @param {string} error
+   */
   failedReservation = (error) => {
     console.log("Failed Reservation :", error);
     //copie du state
@@ -26,12 +30,37 @@ class Reservations extends Component {
     //modification de la copie du state
     copyState.error = error;
     this.setState(copyState);
+    console.log(this.state);
   };
 
   componentDidMount = () => {
     //Tentative de recuperation des donnée
 
-    this.fd.getReservations(this.successResevation, this.failedReservation);
+    //this.fd.getReservations(this.successResevation, this.failedReservation);
+
+    //Utilisation du async/await
+    //faire une appel du fetch et faire en sorte de le traiter sans aucun callback juste le systeme de promesse
+
+    // const fetchDataAsync = async () => {
+    //   const fetch = await this.fd.getReservations();
+    //   console.log(fetch);
+    //   if (!fetch) {
+    //     throw new Error("Une erreur est survenue contactez l'administrateur");
+    //     this.failedReservation();
+    //   } else {
+    //     this.successResevation();
+    //   }
+    // };
+    const fetchDataAsync = async () => {
+      try {
+        const data = await this.fd.getReservations();
+        console.log("data apres le await", data);
+        this.successResevation(data);
+      } catch (error) {
+        this.failedReservation(error);
+      }
+    };
+    fetchDataAsync();
   };
 
   render = () => {
@@ -45,7 +74,7 @@ class Reservations extends Component {
             Merci de contactez l'administrateur
           </h2>
         )}
-        <div class="table-responsive">
+        <div className="table-responsive">
           <table className="table table-striped ">
             <thead className="thead-dark">
               <tr>
@@ -60,7 +89,7 @@ class Reservations extends Component {
             <tbody>
               {reservation.map((reservation) => {
                 return (
-                  <tr key>
+                  <tr key={reservation.id}>
                     <td>{reservation.id}</td>
                     <td>{reservation.categoryId}</td>
                     <td>{reservation.startDate}</td>
