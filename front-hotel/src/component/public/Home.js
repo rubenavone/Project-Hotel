@@ -31,7 +31,7 @@ export default class Home extends Component {
 
     //POST
     try {
-      const reservation = await this.fd.postReservation(payload_reservation);
+      await this.fd.postReservation(payload_reservation);
       console.log("ça c'est bien passé ");
     } catch (error) {
       console.log("Une erreur est survenue", error);
@@ -40,13 +40,14 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div>
+      <main className="container">
         <Header path="/" />
-        <div className="container-fluid align-content-center">
-          <h1>Réservation</h1>
-          <div className="form-row">
-            <div className="col">
-              <form onSubmit={this.handleSubmit}>
+        <div className="row">
+          <h1 className="text-center m-3">Formulaire de réservation</h1>
+
+          <form onSubmit={this.handleSubmit} className="p-3 mt-5">
+            <div className="form-row">
+              <div className="form-group col-md-6">
                 <label htmlFor="start-date-js">
                   date d'arrivée :
                   <input
@@ -54,17 +55,24 @@ export default class Home extends Component {
                     id="start-date-js"
                     type="date"
                     defaultValue=""
+                    className="form-control"
                   />
                 </label>
-                <label htmlFor="end-date-js">
-                  date de départ :
-                  <input
-                    required={true}
-                    id="end-date-js"
-                    type="date"
-                    defaultValue=""
-                  />
-                </label>
+              </div>
+
+              <label htmlFor="end-date-js">
+                date de départ :
+                <input
+                  required={true}
+                  id="end-date-js"
+                  type="date"
+                  defaultValue=""
+                  className="form-control"
+                />
+              </label>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-6">
                 <label htmlFor="persons-js">
                   Nombre de personnes :
                   <input
@@ -72,11 +80,14 @@ export default class Home extends Component {
                     id="persons-js"
                     type="number"
                     max="4"
+                    className="form-control"
                   />
                 </label>
+              </div>
+              <div className="form-group col-md-6">
                 <label htmlFor="room-for-js">
                   Catégory de chambre :
-                  <select required={true} id="room-js">
+                  <select required={true} id="room-js" className="form-control">
                     <option value="1">Chambre simple</option>
                     <option value="2">Chambre double</option>
                     <option value="3">
@@ -88,13 +99,14 @@ export default class Home extends Component {
                     <option value="5">Chambre pour quatre</option>
                   </select>
                 </label>
-
-                <input type="submit" value="Envoyer" />
-              </form>
+              </div>
             </div>
-          </div>
+            <button type="submit" className="btn btn-primary">
+              Envoyer
+            </button>
+          </form>
         </div>
-      </div>
+      </main>
     );
   }
 }

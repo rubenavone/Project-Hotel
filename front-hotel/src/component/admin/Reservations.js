@@ -34,27 +34,10 @@ class Reservations extends Component {
   };
 
   componentDidMount = () => {
-    //Tentative de recuperation des donnée
-
-    //this.fd.getReservations(this.successResevation, this.failedReservation);
-
-    //Utilisation du async/await
-    //faire une appel du fetch et faire en sorte de le traiter sans aucun callback juste le systeme de promesse
-
-    // const fetchDataAsync = async () => {
-    //   const fetch = await this.fd.getReservations();
-    //   console.log(fetch);
-    //   if (!fetch) {
-    //     throw new Error("Une erreur est survenue contactez l'administrateur");
-    //     this.failedReservation();
-    //   } else {
-    //     this.successResevation();
-    //   }
-    // };
     const fetchDataAsync = async () => {
       try {
         const data = await this.fd.getReservations();
-        console.log("data apres le await", data);
+        console.log("data apres le await de reservations", data);
         this.successResevation(data);
       } catch (error) {
         this.failedReservation(error);
@@ -67,7 +50,11 @@ class Reservations extends Component {
     const reservation = this.state.reservations;
     return (
       <div className="col">
-        <h1>Reservations</h1>
+        <div className="row">
+          <div className="col">
+            <h1 className="m-3 text-center">Réservation</h1>
+          </div>
+        </div>
         {this.state.error && (
           <h2>
             le code de l'erreur est {this.state.error.message}
@@ -94,13 +81,16 @@ class Reservations extends Component {
                     <td>{reservation.categoryId}</td>
                     <td>{reservation.startDate}</td>
                     <td>{reservation.endDate}</td>
-                    <td>{reservation.endDate}</td>
+                    <td>{reservation.data.persons}</td>
                     <td>{reservation.id}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+          <button className="btn btn-dark btn-lg btn-block">
+            Ajouter une réservation
+          </button>
         </div>
       </div>
     );

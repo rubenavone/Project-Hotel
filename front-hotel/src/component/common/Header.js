@@ -22,11 +22,13 @@ const Header = (props) => {
     <header className="container">
       <div className="row align-items-center">
         <div className="col-md-4">
-          <img
-            className="img-fluid "
-            src="/image2vector.svg"
-            alt="retour accueil - Hotel Paradise"
-          />
+          <Link to="/home">
+            <img
+              className="img-fluid "
+              src="/image2vector.svg"
+              alt="retour accueil - Hotel Paradise"
+            />
+          </Link>
         </div>
         <div className="col-md-8">
           <h1>Le paradis sur terre</h1>
