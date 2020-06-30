@@ -40,5 +40,5 @@ lerna-debug.log*
 
 # ignore sass compiled files and cache
 
-front-hotel/src/css/variable.css
+front-hotel/src/css/*
 front-hotel/src/.sass-cache
