@@ -14,22 +14,4 @@ $theme-colors: (primary: $or, );
 
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
-
-body {
-    color: #535046;
-}
-
-img {
-    width: 60%
-}
-
-a,
-a:hover,
-a:visited,
-a:focus {
-    text-decoration: none !important
-}
-
-// .btn-primary {
-//     background-color: $or;
-// }
+@import"./global.scss"

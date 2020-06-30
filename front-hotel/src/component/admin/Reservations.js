@@ -95,4 +95,6 @@ class Reservations extends Component {
   };
 }
 
+//Ajouter une croix sur chaque ligne pour supprimer la ligne correspondante en appelant le fetch de suppression en passant l'uuid de la ligne
+
 export default Reservations;

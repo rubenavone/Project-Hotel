@@ -52,17 +52,16 @@ export class FetchData {
     })
       .then(function (response) {
         if (response.status !== 200) {
-          throw new Error("Erreur", response.status);
+          throw new Error("Erreur" + response.json());
         }
         console.log("Dans le fetch de periods");
         return response.json();
       })
       .then(function (data) {
-        console.log("dans le fetch :", data);
+        console.log("dans le fetch :" + data);
         return data;
       });
   };
-
   postReservation = ({ startDate, endDate, persons, category }) => {
     return fetch(
       `${this.url}/booking/try-booking?startDate=${startDate}&endDate=${endDate}&persons=${persons}&category=${category}`,
@@ -86,9 +85,10 @@ export class FetchData {
         }),
       }
     )
-      .then(function (response) {
+      .then(async function (response) {
         if (response.status !== 201) {
-          throw new Error("Erreur", response.status);
+          console.log("erreur :", response);
+          throw await response.json();
         }
         return response.json();
       })

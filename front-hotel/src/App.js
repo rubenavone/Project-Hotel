@@ -13,7 +13,6 @@ function App() {
         <Route path="/admin/" component={Admin} />
         <Route path="/" component={Home} />
       </Switch>
-      <header></header>
     </div>
   );
 }

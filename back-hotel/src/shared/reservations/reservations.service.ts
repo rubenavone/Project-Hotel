@@ -123,7 +123,7 @@ export class ReservationsService {
       });
     } else {
       throw new HttpException(
-        'No room left in this catagory.',
+        'No room left in this category.',
         HttpStatus.PRECONDITION_FAILED,
       );
     }

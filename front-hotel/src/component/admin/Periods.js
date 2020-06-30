@@ -78,7 +78,11 @@ class Periods extends Component {
                   <td>{period.categoryId}</td>
                   <td>{period.startDate}</td>
                   <td>{period.endDate}</td>
-                  <td>{`${period.data.prices}`}</td>
+                  <td>{`${period.data.prices.toString()}`}</td>
+                  {/**
+                   * Faire une methode qui utilise String.reaplace
+                   * pour changer la virgule par un slash
+                   */}
                 </tr>
               );
             })}

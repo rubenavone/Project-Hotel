@@ -30,25 +30,16 @@ const Header = (props) => {
             />
           </Link>
         </div>
-        <div className="col-md-8">
-          <h1>Le paradis sur terre</h1>
-          <nav>
-            <ul className="list-unstyled text-dark d-flex justify-content-end ">
-              {/* <li>
-              <Link className={isSelected("/")} to="/">
-                Acceuil
-              </Link>
-            </li> */}
+
+        <div className="row">
+          <h1 className="col-md-11 mt-5">Le paradis sur terre</h1>
+          <nav className="col-md-1 mb-5">
+            <ul className="list-unstyled text-dark justify-content-end ">
               <li>
                 <Link className={isSelected("/admin")} to="/admin/reservations">
                   Administration
                 </Link>
               </li>
-              {/* <li>
-              <a className="p-4" href="#" onClick={redirectLink}>
-                Nous contactez
-              </a>
-            </li> */}
             </ul>
           </nav>
         </div>

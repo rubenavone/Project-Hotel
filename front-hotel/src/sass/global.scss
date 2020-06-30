@@ -1,0 +1,47 @@
+body {
+  color: #535046;
+}
+
+img {
+  width: 60%
+}
+
+a,
+a:hover,
+a:visited,
+a:focus {
+  text-decoration: none !important
+}
+
+.img-resize {
+  width: 200%;
+  height: 500px;
+  z-index: -1;
+  object-fit: cover;
+  object-position: top;
+}
+
+.form-home {
+  position: absolute;
+  top: 400px;
+  left: 130px;
+  z-index: 1;
+
+}
+
+.background-white {
+  background-color: white;
+  width: 61%;
+}
+
+p {
+  font-size: 1.3em;
+}
+
+.nav-second {
+  margin-top: 15px;
+}
+
+// .btn-primary {
+//     background-color: $or;
+// }
