@@ -53,10 +53,10 @@ class Periods extends Component {
           <h1 className="m-3 text-center">Periods</h1>
 
           {this.state.error && (
-            <h2>
-              le code de l'erreur est {this.state.error.message}
-              Merci de contactez l'administrateur
-            </h2>
+            <div className="container text-danger">
+              <h2>le code de l'erreur est {this.state.error.message}</h2>
+              <p>Merci de contactez l'administrateur</p>
+            </div>
           )}
         </div>
 
