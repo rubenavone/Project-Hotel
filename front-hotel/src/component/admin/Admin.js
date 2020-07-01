@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import Header from "../common/Header";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 import Reservations from "./Reservations";
 import Periods from "./Periods";
 import Rooms from "./Rooms";
-import { Link } from "react-router-dom";
 
 export default class Admin extends Component {
   state = {};
@@ -22,7 +21,7 @@ export default class Admin extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <Header path="/admin" />
         <main className="container">
           <div className="row">

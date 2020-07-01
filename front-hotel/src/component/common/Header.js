@@ -19,9 +19,9 @@ const Header = (props) => {
   };
 
   return (
-    <header className="container">
+    <header className="container-fluid">
       <div className="row align-items-center">
-        <div className="col-md-4">
+        <div className="col-3 mt-4 mb-0">
           <Link to="/home">
             <img
               className="img-fluid "
@@ -30,18 +30,29 @@ const Header = (props) => {
             />
           </Link>
         </div>
-
-        <div className="row">
-          <h1 className="col-md-11 mt-5">Le paradis sur terre</h1>
-          <nav className="col-md-1 mb-5">
-            <ul className="list-unstyled text-dark justify-content-end ">
-              <li>
-                <Link className={isSelected("/admin")} to="/admin/reservations">
-                  Administration
-                </Link>
-              </li>
-            </ul>
-          </nav>
+        <div className="col"></div>
+        <div className="container">
+          <div className="row">
+            <nav className="col d-flex align-items-end justify-content-end ">
+              <ul className="list-unstyled text-dark ">
+                <li>
+                  <Link
+                    className={isSelected("/admin")}
+                    to="/admin/reservations"
+                  >
+                    Administration
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div className="row">
+            <div className="col align-content-end ">
+              <h1 className=" d-flex align-items-end justify-content-end title-stylised col-md-11 mt-5 display-absolute">
+                Un paradis sur terre
+              </h1>
+            </div>
+          </div>
         </div>
       </div>
     </header>

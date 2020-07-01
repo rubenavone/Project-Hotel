@@ -46,6 +46,26 @@ class Reservations extends Component {
     fetchDataAsync();
   };
 
+  handleClickDelete = async (e, reservation) => {
+    console.log("Dans handleClickDelete : ", reservation);
+    try {
+      await this.fd.deleteReservation(reservation.code);
+      const copy_state = { ...this.state };
+      // On retrouve la réservation dans le tableau reservations
+      const index_reservation = copy_state.reservations.indexOf(reservation);
+      copy_state.reservations.splice(index_reservation, 1);
+      copy_state.error = null;
+
+      this.setState(copy_state);
+    } catch (error) {
+      console.log("Erreur attrapée dans handleClickDelete : ", error);
+      const copy_state = { ...this.state };
+      // On retrouve la réservation dans le tableau reservations
+      copy_state.error = error;
+
+      this.setState(copy_state);
+    }
+  };
   render = () => {
     const reservation = this.state.reservations;
     return (
@@ -84,7 +104,14 @@ class Reservations extends Component {
                   <td>{reservation.data.persons}</td>
                   <td>{reservation.data.nights}</td>
                   <td>
-                    <button className="btn btn-danger ml-1">Supprimer</button>
+                    <button
+                      className="btn btn-danger ml-1"
+                      onClick={(e) => {
+                        this.handleClickDelete(e, reservation);
+                      }}
+                    >
+                      Supprimer
+                    </button>
                   </td>
                 </tr>
               );
