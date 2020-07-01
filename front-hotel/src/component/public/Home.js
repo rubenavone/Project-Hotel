@@ -8,14 +8,7 @@ export default class Home extends Component {
     super(props);
     this.state = {
       error: null,
-      reservations: {
-        startDate: "2020-20-10",
-        endDate: "2020-22-20",
-        data: {
-          persons: 1,
-        },
-        code: "ZEDZAZER",
-      },
+      reservation: null,
     };
 
     this.fd = new FetchData();
@@ -47,7 +40,8 @@ export default class Home extends Component {
       //copie du state
       const copyState = { ...this.state };
       //modification de la copie du state
-      copyState.reservations = reservation;
+      copyState.reservation = reservation;
+      copyState.error = null;
       this.setState(copyState);
       console.log(this.state);
     } catch (error) {
@@ -61,8 +55,25 @@ export default class Home extends Component {
     }
   };
 
+  handleClickDelete = async (event) => {
+    console.log("Dans handle submit ");
+    const userUuid = this.state.reservation.code;
+    console.log("Code de l'utilisateur", userUuid);
+    try {
+      await this.fd.deleteReservation(this.state.reservation.code);
+      const copyState = { ...this.state };
+      copyState.reservation = null;
+      this.setState(copyState);
+    } catch (error) {
+      console.log("Une erreur est survenue pendant la supression");
+      const copyState = { ...this.State };
+      copyState.error = error;
+      this.setState(copyState);
+    }
+  };
+
   render() {
-    const reservation = this.state.reservations;
+    const reservation = this.state.reservation;
     return (
       <main className="container-fluid ">
         <Header path="/" />
@@ -162,7 +173,7 @@ export default class Home extends Component {
             </ul>
           </nav>
         </div>
-        <div className="row">
+        <div className="row mb-5">
           <div className="col-3"></div>
           <div className="col-7 mt-5">
             <h2 className="text-center">Presentation de l'hotel</h2>
@@ -183,8 +194,8 @@ export default class Home extends Component {
           </div>
           <div className="col-2"></div>
         </div>
-        {this.state.reservations && (
-          <div className="row">
+        {this.state.reservation && (
+          <div className="row mb-5">
             <div className="col-3"></div>
             <div className="col-7">
               <h2 className="m-3 text-center">Votre Réservation</h2>
@@ -206,7 +217,10 @@ export default class Home extends Component {
                   </tr>
                 </tbody>
               </table>
-              <button className="btn btn-danger btn-lg btn-block">
+              <button
+                className="btn btn-danger btn-lg btn-block"
+                onClick={this.handleClickDelete}
+              >
                 Supprimer votre réservation
               </button>
               <div className="col-2"></div>

@@ -70,6 +70,7 @@ class Reservations extends Component {
               <th>Date de fin</th>
               <th>Nombre de personne</th>
               <th>Nombre de nuit</th>
+              <th>Supprimer la réservation</th>
             </tr>
           </thead>
           <tbody>
@@ -81,7 +82,10 @@ class Reservations extends Component {
                   <td>{reservation.startDate}</td>
                   <td>{reservation.endDate}</td>
                   <td>{reservation.data.persons}</td>
-                  <td>{reservation.id}</td>
+                  <td>{reservation.data.nights}</td>
+                  <td>
+                    <button className="btn btn-danger ml-1">Supprimer</button>
+                  </td>
                 </tr>
               );
             })}

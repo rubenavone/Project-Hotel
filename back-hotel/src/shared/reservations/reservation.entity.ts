@@ -42,6 +42,9 @@ export class Reservation {
   @Column({ name: 'start_date', type: 'date' })
   startDate: string; //'2020-06-24'
 
+  @Column()
+  code: string;
+
   @Column({ name: 'end_date', type: 'date' })
   endDate: string; //'2020-06-24'
 

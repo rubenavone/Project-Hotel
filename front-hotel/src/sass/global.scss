@@ -15,15 +15,15 @@ a:focus {
 
 .img-resize {
   width: 200%;
-  height: 500px;
+  height: 350px;
   z-index: -1;
   object-fit: cover;
-  object-position: top;
+  object-position: 0px -200px;
 }
 
 .form-home {
   position: absolute;
-  top: 400px;
+  top: 200px;
   left: 130px;
   z-index: 1;
 

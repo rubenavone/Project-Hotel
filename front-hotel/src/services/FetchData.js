@@ -21,7 +21,7 @@ export class FetchData {
         return response.json();
       })
       .then(function (data) {
-        console.log("dans le fetch :", data);
+        console.log("dans le fetch get reservation :", data);
         return data;
       });
   };
@@ -39,7 +39,7 @@ export class FetchData {
         return response.json();
       })
       .then(function (data) {
-        console.log("dans le fetch :", data);
+        console.log("dans le fetch get category :", data);
         return data;
       });
   };
@@ -58,7 +58,7 @@ export class FetchData {
         return response.json();
       })
       .then(function (data) {
-        console.log("dans le fetch :" + data);
+        console.log("dans le fetch get periods :" + data);
         return data;
       });
   };
@@ -97,4 +97,26 @@ export class FetchData {
         return data;
       });
   };
+  /*Ajouter le fetch de supressions et faire fonctionner le bouton de supression 
+  dans la page*/
+  deleteReservation = (code) => {
+    return fetch(`${this.url}/booking/${code}`, {
+      credentials: this.credentials,
+      method: "DELETE",
+      headers: this.header,
+    })
+      .then(function (response) {
+        if (response.status !== 200) {
+          throw new Error("Erreur", response.status);
+        }
+        return response.json();
+      })
+      .then(function (data) {
+        console.log("dans le fetch delete reservation :", data);
+        return data;
+      });
+  };
+  /**
+   * Créer une méthode fetch qui va utilisé le booking available
+   */
 }
